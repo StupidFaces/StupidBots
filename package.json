@@ -1,0 +1,18 @@
+{
+  "name": "stupidbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/stupidBot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "algosdk": "^1.13.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  }
+}
