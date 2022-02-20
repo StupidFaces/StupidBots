@@ -1,0 +1,28 @@
+{
+    "collectionMapping": [
+        {
+            "id": 1,
+            "name": "stupid-face",
+            "address": "KKBVJLXALCENRXQNEZC44F4NQWGIEFKKIHLDQNBGDHIM73F44LAN7IAE5Q",
+            "roleId": "920087263646453851"
+        },
+        {
+            "id": 2,
+            "name": "unkown-blob",
+            "address": "S6ECCRJW52XXRG6YPM3IVLYFSFPVLZHQVTJFDAEHAFWYP6NYQQE2R3VPOA",
+            "roleId": "916407935217856553"
+        },
+        {
+            "id": 3,
+            "name": "unknown-origin",
+            "address": "TEMNKCHDMOSOVA47BQ33NPIAKYQ2Y2FKAFKHL7FK3NGGHHPEIV7PQLGKXE",
+            "roleId": "916407935217856553"
+        },
+        {
+            "id": 4,
+            "name": "unknown-blob",
+            "address": "33T5UK5JT53UHY47BDVJFVI3B2OUU7IAMVQJHYOWU3N4EQOZLOBTCLSGLE",
+            "roleId": "916407935217856553"
+        }
+    ]
+}
