@@ -72,7 +72,7 @@ async function verify(interaction) {
                     //console.log('MEMBER_ROLES: ', member.roles);
                     
                     await member.roles.add(roleBindings[collectionName].roleId);
-                    responseMessages.push(`Found ${roleBindings[collectionName].count} Asset(s) of collection **${collectionName}** - Role added`);
+                    responseMessages.push(`Found ${roleBindings[collectionName].count} Asset(s) of collection **${collectionName}**. Role <@&${roleBindings[collectionName].roleId}> added.`);
 
                 } catch (error) {
                     responseMessages.push(`Something went when trying to add role for ${collectionName}.`);
