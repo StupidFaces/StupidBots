@@ -11,13 +11,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
-    "algosdk": "^1.13.1",
+    "@discordjs/rest": "^0.3.0",
+    "algosdk": "^1.15.0",
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
-    "pg": "^8.7.3",
-    "@discordjs/rest": "^0.3.0"
+    "pg": "^8.7.3"
   }
 }

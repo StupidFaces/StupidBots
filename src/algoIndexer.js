@@ -6,8 +6,8 @@ const allCollectionAssets = {};
 
 (async () =>  {
     for (let collection of COLLECTIONS) {
-        const accountWrapper = await algoIndexer.lookupAccountByID(collection.address).do();
-        const createdAssets = accountWrapper.account['created-assets'];
+        const indexerResponse = await algoIndexer.lookupAccountCreatedAssets(collection.address).limit(1000).do();
+        const createdAssets = indexerResponse['assets'];
         const collectionsAssets = []
         for (let asset of createdAssets) {
             if (!asset.deleted) {
@@ -20,8 +20,8 @@ const allCollectionAssets = {};
 
 
 async function getHoldingAssets(publicKey) {
-    const accountWrapper = await algoIndexer.lookupAccountByID(publicKey).do();
-    const allAssets = accountWrapper.account['assets'];
+    const accountWrapper = await algoIndexer.lookupAccountAssets(publicKey).limit(1000).do();
+    const allAssets = accountWrapper['assets'];
     const hodledAssets = [];
     for (let asset of allAssets) {
         if (asset.amount > 0) {

@@ -1,3 +1,11 @@
+CREATE TABLE public.collection (
+    uid serial NOT NULL,
+    name varchar NOT NULL,
+    address varchar NOT NULL,
+    PRIMARY KEY(uid)
+);
+
+
 CREATE TABLE public.hodler (
     uid serial NOT NULL,
     discord_id varchar NOT NULL,
@@ -9,12 +17,6 @@ CREATE TABLE public.hodler (
     PRIMARY KEY(uid)
 );
 
-CREATE TABLE public.collection (
-    uid serial NOT NULL,
-    name varchar NOT NULL,
-    address varchar NOT NULL,
-    PRIMARY KEY(uid)
-);
 
 CREATE TABLE public.asset (
     uid serial NOT NULL,
