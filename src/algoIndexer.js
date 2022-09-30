@@ -29,7 +29,14 @@ async function getHoldingAssets(publicKey) {
         }
     }
     return hodledAssets;
-    
+}
+
+async function getRandomAsset(collectionName) {
+    const collectionAssets = allCollectionAssets[collectionName];
+    const randomAssetId = collectionAssets[Math.floor(Math.random() * collectionAssets.length)];
+    const randomAsset = await algoIndexer.lookupAssetByID(randomAssetId).do();
+
+    return randomAsset;
 
 }
 
@@ -40,5 +47,6 @@ async function getHoldingAssets(publicKey) {
 
 module.exports = {
     allCollectionAssets,
-    getHoldingAssets
+    getHoldingAssets,
+    getRandomAsset
 }
