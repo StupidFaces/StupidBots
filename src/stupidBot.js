@@ -1,7 +1,9 @@
-require("dotenv").config();
+require("dotenv").config({path: `.${process.env.NODE_ENV}.env`});
 const path = require('path');
 const fs = require('fs');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
+
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
 
 
 const client = new Client({

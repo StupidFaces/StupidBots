@@ -29,3 +29,14 @@ CREATE TABLE public.asset (
     CONSTRAINT fk_collection FOREIGN KEY(collection_id) REFERENCES collection(uid),
     PRIMARY KEY(uid)
 );
+
+CREATE TABLE public.face_of_the_month (
+    uid serial NOT NULL,
+    asset_id int NOT NULL,
+    month_year varchar,
+    hodler_public_key varchar,
+    reward_amount int NOT NULL,
+    reward_asset_id int NOT NULL,
+    created_at timestamp NULL DEFAULT now(),
+    PRIMARY KEY(uid)
+);

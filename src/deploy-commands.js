@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: `.${process.env.NODE_ENV}.env`});
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');

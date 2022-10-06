@@ -40,6 +40,18 @@ async function getRandomAsset(collectionName) {
 
 }
 
+async function getAssetOwnerPublicKey(assetId) {
+    try {
+        const assetInfo = await algoIndexer.lookupAssetBalances(assetId).do();
+        const holderPublicKey = assetInfo.balances.filter(balance => balance.amount > 0)[0].address;
+
+        return holderPublicKey;
+
+    } catch (error) {
+        console.error(error);
+
+    }
+}
 // (async () => {
 //     const blub = await getHoldingAssets('RIVO6GZHMRARJF7DBHTUMKBEZMNMH5ZNGEC6J3ZAVXV3JCDTJFMNMJZ5YU');
 //     bla = 'Was'
@@ -48,5 +60,6 @@ async function getRandomAsset(collectionName) {
 module.exports = {
     allCollectionAssets,
     getHoldingAssets,
-    getRandomAsset
+    getRandomAsset,
+    getAssetOwnerPublicKey
 }

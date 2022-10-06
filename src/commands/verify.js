@@ -127,8 +127,8 @@ class Hodler {
 
     async persistHodler() {
         const connection = await pgPool.connect();
-        const updateSql = 'UPDATE hodler SET discord_id = $1, discord_name = $2, public_key = $3 WHERE discord_id = $4 RETURNING uid;';
-        const insertSql = 'INSERT INTO hodler(discord_id, discord_name, public_key) VALUES($1, $2, $3) RETURNING uid;';
+        const updateSql = `UPDATE ${process.env.HODLER_TABLE} SET discord_id = $1, discord_name = $2, public_key = $3 WHERE discord_id = $4 RETURNING uid;`;
+        const insertSql = `INSERT INTO  ${process.env.HODLER_TABLE}(discord_id, discord_name, public_key) VALUES($1, $2, $3) RETURNING uid;`;
         const updateValues = [this.discordId, this.discordName, this.publicKey, this.discordId];
         const insertValues = [this.discordId, this.discordName, this.publicKey];
 
@@ -140,7 +140,7 @@ class Hodler {
             }
             this.dbUid = result['rows'][0]['uid'];
         } catch (error) {
-            throw new Error(error);
+            console.error(error);
         } finally {
             connection.release()
         }
@@ -148,8 +148,8 @@ class Hodler {
 
     async persistAssets() {
         const connection = await pgPool.connect();
-        const updateSql = 'UPDATE asset SET asset_id = $1, hodler_id = $2, collection_id = $3 WHERE asset_id = $1';
-        const insertSql = 'INSERT INTO asset(asset_id, hodler_id, collection_id) VALUES($1, $2, $3)';
+        const updateSql = `UPDATE ${process.env.ASSET_TABLE} SET asset_id = $1, hodler_id = $2, collection_id = $3 WHERE asset_id = $1`;
+        const insertSql = `INSERT INTO ${process.env.ASSET_TABLE}(asset_id, hodler_id, collection_id) VALUES($1, $2, $3)`;
         const valuesArray = this.assets.map(asset => [
                 asset.assetId,
                 this.dbUid,
@@ -166,7 +166,7 @@ class Hodler {
             }
 
         } catch (error) {
-            throw new Error(error);
+            console.error(error);
         } finally {
             connection.release()
         }
