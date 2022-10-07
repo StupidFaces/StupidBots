@@ -100,6 +100,8 @@ async function persist(asset, owner, reward, rewardAmount) {
         reward.assetId
     ]
 
+    console.info(insertSql);
+
     try {
         await pgPool.query(insertSql, values);
     } catch (error) {
