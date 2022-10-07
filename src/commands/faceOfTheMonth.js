@@ -8,6 +8,39 @@ const pgPool = new Pool({
     ssl: { rejectUnauthorized: false }
 })
 
+const REWARDS = [
+    {
+        name: "Shrimp",
+        base: 10,
+        multiplier: 1,
+        assetId: 360019122
+    },
+    {
+        name: "Oats",
+        base: 500,
+        multiplier: 10,
+        assetId: 493895498
+    },
+    {
+        name: "Hoot",
+        base: 10,
+        multiplier: 1,
+        assetId: 797382233
+    },
+    {
+        name: "$Poof",
+        base: 50,
+        multiplier: 5,
+        assetId: 658399558
+    },
+    {
+        name: "BrontosToken",
+        base: 50,
+        multiplier: 5,
+        assetId: 875537962
+    }
+]
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,17 +57,20 @@ async function faceOfTheMonth(interaction) {
         const randomStupidFace = await getRandomAsset('stupid-face');
         const randomFaceIpfs = randomStupidFace.asset.params.url.split('/').at(-1);
         const owner = await getAssetOwnerPublicKey(randomStupidFace.asset.index);
-        await persist(randomStupidFace, owner);
-        const trophies = ':trophy: '.repeat(await getFaceOfTheMonthCount(randomStupidFace.asset.index));
+        const trophyCount = await getFaceOfTheMonthCount(randomStupidFace.asset.index) + 1;
+        const reward = getReward();
+        const rewardAmount = (trophyCount) * reward.multiplier + reward.base;
+        await persist(randomStupidFace, owner, reward, rewardAmount);
+
 
         const embed = new EmbedBuilder()
             .setColor(0xfff5db)
-            .setTitle(`Face of the Month: ${new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}`)
+            .setTitle(`Face of the Month: ${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}`)
             .setDescription(`${randomStupidFace.asset.params.name}`)
             .addFields(
-                {name: 'Trophies', value: trophies },
+                {name: 'Trophies', value: ':trophy: '.repeat(trophyCount) },
                 { name: 'Owner', value: owner.replace(owner.substring(4,54), "..."), inline: true },
-                { name: 'Price', value: 'nuthing', inline: true }
+                { name: 'Price', value: `${rewardAmount} ${reward.name}`, inline: true }
             )
             .setImage(`https://stupidface.art/assets/faces/${randomFaceIpfs}.png`)
             .setTimestamp()
@@ -52,14 +88,16 @@ async function faceOfTheMonth(interaction) {
     }
 }
 
-async function persist(asset, owner) {
+async function persist(asset, owner, reward, rewardAmount) {
     const connection = await pgPool.connect();
-    const insertSql = `INSERT INTO ${process.env.FACE_OF_THE_MONTH_TABLE}(asset_id, month_year, hodler_public_key) VALUES($1, $2, $3)`;
+    const insertSql = `INSERT INTO ${process.env.FACE_OF_THE_MONTH_TABLE}(asset_id, month_year, hodler_public_key, reward_amount, reward_asset_id) VALUES($1, $2, $3, $4, $5)`;
 
     const values = [
         asset.asset.index,
         new Date().toISOString(),
-        owner
+        owner,
+        rewardAmount,
+        reward.assetId
     ]
 
     try {
@@ -78,11 +116,14 @@ async function getFaceOfTheMonthCount(assetId) {
     try {
         const countQuery = await pgPool.query(countSql);
         const count = countQuery['rows'][0]['count']
-        return count;
+        return parseInt(count);
     } catch (error) {
         console.error(error)
     } finally {
         connection.release()
     }
-    
+}
+
+function getReward() {
+    return REWARDS[Math.floor(Math.random()*REWARDS.length)];
 }

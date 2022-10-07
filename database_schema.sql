@@ -35,8 +35,8 @@ CREATE TABLE public.face_of_the_month (
     asset_id int NOT NULL,
     month_year varchar,
     hodler_public_key varchar,
-    reward_amount int NOT NULL,
-    reward_asset_id int NOT NULL,
+    reward_amount int,
+    reward_asset_id int,
     created_at timestamp NULL DEFAULT now(),
     PRIMARY KEY(uid)
 );
