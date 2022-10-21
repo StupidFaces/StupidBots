@@ -20,7 +20,7 @@ const allCollectionAssets = {};
 
 
 async function getHoldingAssets(publicKey) {
-    const accountWrapper = await algoIndexer.lookupAccountAssets(publicKey).limit(1000).do();
+    const accountWrapper = await algoIndexer.lookupAccountAssets(publicKey).limit(10000).do();
     const allAssets = accountWrapper['assets'];
     const hodledAssets = [];
     for (let asset of allAssets) {
