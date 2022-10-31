@@ -3,9 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
-console.log(`StupidBot starting with NODE_ENV: ${process.env.NODE_ENV}`);
-console.info(process.env);
-
+console.log(`StupidBot starting with NODE_ENV=${process.env.NODE_ENV}`);
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
