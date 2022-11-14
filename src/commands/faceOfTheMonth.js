@@ -18,13 +18,13 @@ const REWARDS = [
     {
         name: "Oats",
         base: 500,
-        multiplier: 10,
+        multiplier: 100,
         assetId: 493895498
     },
     {
         name: "Hoot",
-        base: 10,
-        multiplier: 1,
+        base: 50,
+        multiplier: 5,
         assetId: 797382233
     },
     {
@@ -34,11 +34,17 @@ const REWARDS = [
         assetId: 658399558
     },
     {
-        name: "BrontosToken",
-        base: 50,
-        multiplier: 5,
-        assetId: 875537962
-    }
+        name: "Roar",
+        base: 100,
+        multiplier: 10,
+        assetId: 917962457
+    },
+    {
+        name: "$Stache",
+        base: 20,
+        multiplier: 2,
+        assetId: 893109155
+    },
 ]
 
 
