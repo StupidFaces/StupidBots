@@ -67,7 +67,7 @@ async function faceOfTheMonth(interaction) {
             .setTitle(`Face of the Month: ${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}`)
             .setDescription(`${randomStupidFace.asset.params.name}`)
             .addFields(
-                {name: 'Trophies', value: ':trophy: '.repeat(trophyCount) },
+                { name: 'Trophies', value: ':trophy: '.repeat(trophyCount) },
                 { name: 'Owner', value: owner.replace(owner.substring(4,54), "..."), inline: true },
                 { name: 'Price', value: `${rewardAmount} ${reward.name}`, inline: true }
             )
