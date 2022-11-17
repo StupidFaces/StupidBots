@@ -5,7 +5,6 @@ const { EmbedBuilder } = require('discord.js');
 
 const pgPool = new Pool({
     connectionString: process.env.DB_CONNECTION_STRING,
-    ssl: { rejectUnauthorized: false }
 })
 
 const REWARDS = [
@@ -74,7 +73,7 @@ async function faceOfTheMonth(interaction) {
             .setTitle(`Face of the Month: ${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}`)
             .setDescription(`${randomStupidFace.asset.params.name}`)
             .addFields(
-                {name: 'Trophies', value: ':trophy: '.repeat(trophyCount) },
+                { name: 'Trophies', value: ':trophy: '.repeat(trophyCount) },
                 { name: 'Owner', value: owner.replace(owner.substring(4,54), "..."), inline: true },
                 { name: 'Price', value: `${rewardAmount} ${reward.name}`, inline: true }
             )
@@ -96,7 +95,7 @@ async function faceOfTheMonth(interaction) {
 
 async function persist(asset, owner, reward, rewardAmount) {
     const connection = await pgPool.connect();
-    const insertSql = `INSERT INTO ${process.env.FACE_OF_THE_MONTH_TABLE}(asset_id, month_year, hodler_public_key, reward_amount, reward_asset_id) VALUES($1, $2, $3, $4, $5)`;
+    const insertSql = `INSERT INTO face_of_the_month(asset_id, month_year, hodler_public_key, reward_amount, reward_asset_id) VALUES($1, $2, $3, $4, $5)`;
 
     const values = [
         asset.asset.index,
@@ -119,7 +118,7 @@ async function persist(asset, owner, reward, rewardAmount) {
 
 async function getFaceOfTheMonthCount(assetId) {
     const connection = await pgPool.connect();
-    const countSql = `SELECT COUNT(${assetId}) FROM ${process.env.FACE_OF_THE_MONTH_TABLE} WHERE asset_id=${assetId}`;
+    const countSql = `SELECT COUNT(${assetId}) FROM face_of_the_month WHERE asset_id=${assetId}`;
 
     try {
         const countQuery = await pgPool.query(countSql);
