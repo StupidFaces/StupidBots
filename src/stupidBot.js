@@ -112,6 +112,7 @@ async function getDailyInfoEmbed(message, countryCode) {
         .setURL(data.weather.location.link)
         //.setThumbnail(`https://stupidface.art/assets/faces/${data.stupidQuote.stupidFace.ipfsHash}.png`)
         .addFields(
+            { name: 'Guessed Location', value: `${data.weather.location.city} ${flagShortCode}` },
             { name: `Weather ${cloudMapping[data.weather.description]}`, value: `:thermometer: ${data.weather.temp}°C / ${(data.weather.temp*1.8+32).toFixed(2)}°F   :droplet:${data.weather.humidity}%  `, inline: true },
             { name: `Air Quality`, value: `${airPollutionMapping[data.weather.location.airPollution.main.aqi]}`, inline: true },
             { name: 'Algo Tnx/24 hours', value: `${data.dailyTransactions}`}
