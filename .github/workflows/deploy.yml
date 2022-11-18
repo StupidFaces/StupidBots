@@ -11,9 +11,9 @@ jobs:
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.STUPID_BOT_PRIVATE_KEY }}
+        host: ${{ secrets.STUPID_HOST }}
+        username: ${{ secrets.STUPID_USER }}
+        key: ${{ secrets.STUPID_PRIVATE_KEY }}
         port: 4422
         script: |
           cd /home/grex/app/stupid-bots
