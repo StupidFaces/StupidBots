@@ -1,7 +1,7 @@
 const algosdk = require("algosdk");
 const COLLECTIONS = require("./settings.json").collectionMapping;
-
-const algoIndexer = new algosdk.Indexer('',"https://algoindexer.algoexplorerapi.io",'443',{'User-Agent':'Stupid-Bot'});
+// const algoIndexer = new algosdk.Indexer('',"https://algoindexer.algoexplorerapi.io",'443',{'User-Agent':'Stupid-Bot'});
+const algoIndexer = new algosdk.Indexer('',"https://mainnet-idx.algonode.network",'443');
 const allCollectionAssets = {};
 
 (async () =>  {
